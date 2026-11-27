@@ -1,0 +1,4 @@
+# 大文件不提交（用 Release 上传）
+*.mrpack
+*.zip
+*.7z
