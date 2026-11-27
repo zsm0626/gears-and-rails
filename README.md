@@ -203,10 +203,36 @@ Chromium 判定「GPU 不可用」后直接 FATAL，触发断点异常，**把�
 
 **如果重启后文件夹又被重新生成**：
 
-说明 TSU 每次启动都会解包 CEF。此时需要：
+说明 TSU 每次启动都会解包 CEF（因为 CEF 打包在 `trainsystemutilities-1.2.2.jar` 内部的 `manta-2.95.1.jar` 里）。
+
+**终极方案：用「无 CEF 版 TSU」**：
+
+整合包已附带替代文件：
+
+```
+trainsystemutilities-1.2.2-noCEF.jar  （9.8 MB，原版 141.5 MB）
+```
+
+**替换方法**：
+
+```
+1. 删掉 mods\trainsystemutilities-1.2.2.jar
+2. 放入 trainsystemutilities-1.2.2-noCEF.jar（改名为原文件名也行）
+3. 重启游戏
+```
+
+**效果**：
+
+- ✅ CEF 从源头删除（不会重建，不会崩）
+- ✅ 车站大屏（Manta6 管理电脑）、调度、供电、站台 **全部保留**
+- ✅ 视频功能关闭
+
+**原理**：这个 jar 是把官方 TSU 里的 `mcsschrome/mcss-chrome-bin.zip`（131.9 MB）删掉后的版本，其他内容完全没动。
+
+**或者**：
 
 - 换 **Java 21**（NeoForge 21.1 官方目标版本，Java 25 可能有问题）
-- 或者等 TSU 作者修复（报给作者：CEF 应支持 `--disable-gpu` 降级，不该 FATAL 宿主进程）
+- 更新 **NVIDIA 驱动**（有些 GPU 驱动问题会导致 CEF 的 GPU 子进程起不来）
 
 ---
 
